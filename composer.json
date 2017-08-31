@@ -1,0 +1,19 @@
+{
+    "name": "eriktorsner/wp-shortcode",
+    "description": "wp-cli command to list active shortcodes",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/eriktorsner/wp-shortcode",
+    "license": "MIT",
+    "authors": [],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "files": [ "command.php" ]
+    },
+    "require": {
+        "wp-cli/wp-cli": "^1.1.0"
+    },
+    "require-dev": {
+        "behat/behat": "~2.5"
+    }
+}
