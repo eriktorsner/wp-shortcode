@@ -5,11 +5,24 @@ if ( ! class_exists( 'WP_CLI' ) ) {
 }
 
 /**
- * Says "Hello World" to new users
+ * List shortcodes
  *
- * @when before_wp_load
  */
-$hello_world_command = function() {
-	WP_CLI::success( "Hello world." );
+$listShortcodes = function($args, $assoc_args)
+{
+    $shortcodes = $GLOBALS['shortcode_tags'];
+    
+    $ret = [];
+    foreach ($shortcodes as $tag => $callback) {
+        $ret[] = [
+            'tag' => $tag,
+            'callback' => (string)$callback,
+        ];
+    }
+
+    $format = isset($assoc_args['format']) ? $assoc_args['format'] : 'table';
+    WP_CLI\Utils\format_items($format, $ret, array( 'tag', 'callback'));
 };
-WP_CLI::add_command( 'hello-world', $hello_world_command );
+
+
+WP_CLI::add_command( 'shortcode list', $listShortcodes);
