@@ -11,12 +11,14 @@ if ( ! class_exists( 'WP_CLI' ) ) {
 $listShortcodes = function($args, $assoc_args)
 {
     $shortcodes = $GLOBALS['shortcode_tags'];
-    
+
     $ret = [];
     foreach ($shortcodes as $tag => $callback) {
         $ret[] = [
             'tag' => $tag,
-            'callback' => (string)$callback,
+            'callback' => is_array($callback) ?
+                (string)$callback[0] . '::' . (string)$callback[1] :
+               $callback,
         ];
     }
 
@@ -26,3 +28,4 @@ $listShortcodes = function($args, $assoc_args)
 
 
 WP_CLI::add_command( 'shortcode list', $listShortcodes);
+
